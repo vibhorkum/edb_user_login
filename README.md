@@ -26,6 +26,7 @@ make install
 
 4. After installing the module, set the following parameters:
 ```cmd
+ssession_preload_libraries = '$libdir/edb_user_login'
 edb_user_login.enabled = true
 edb_user_login.login_procedure_name = 'public.login_procedure'
 ```
@@ -33,3 +34,15 @@ edb_user_login.login_procedure_name = 'public.login_procedure'
 Where *edb_user_login.enabled* is enable to execution of all roles inside the database and *edb_user_login.login_procedure_name* is for procedure/function which DBAs/Developers want to execute after each successful login. 
 
 Please note: Procedure/function should not include any (). Also, this module ignores the output of function/procedures.
+
+
+Also, if user wants to disable the execution of procedure/function for specific user or specific database, they can use following command:
+```cmd
+ALTER USER <username> SET edb_user_login.enabled TO false;
+ALTER DATABASE <databasename> SET edb_user_login.enabled TO false;
+```
+If user wants to execute some other specific procedure/function for user/database then following command allows that:
+```cmd
+ALTER USER <username> SET edb_user_login.login_procedure_name TO '<schema>.procedure';
+ALTER DATABASE <databasename> SET edb_user_login.login_procedure_name TO '<schema>.procedure';
+```
