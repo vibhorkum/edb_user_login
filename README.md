@@ -30,6 +30,6 @@ edb_user_login.enabled = true
 edb_user_login.login_procedure_name = 'public.login_procedure'
 ```
 
-Where edb_user_login.enabled is enable to execution of all roles inside the database and edb_user_login.login_procedure_name is for procedure/function which DBAs/Developers want to execute after each successful login. 
+Where *edb_user_login.enabled* is enable to execution of all roles inside the database and *edb_user_login.login_procedure_name* is for procedure/function which DBAs/Developers want to execute after each successful login. 
 
 Please note: Procedure/function should not include any (). Also, this module ignores the output of function/procedures.
