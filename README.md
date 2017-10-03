@@ -1,6 +1,6 @@
 # edb_user_login
 
-edb_user_login is an extension which allows to users to include after logon procedures/procedure for EDB Postgres Advanced Server Version 9.6
+edb_user_login is an extension which allows to users to include after logon procedures/functions for EDB Postgres Advanced Server Version 9.6
 
 # Installation
 
