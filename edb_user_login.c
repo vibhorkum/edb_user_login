@@ -36,10 +36,12 @@ exec_function(char *funcname)
 	List *names;
 
 	names = stringToQualifiedNameList(funcname);
-	clist = FuncnameGetCandidatesEx(names, -1, NIL, false, false, true, T_PROC, false, false, NIL, false);
+	clist = FuncnameGetCandidatesEx(names, -1, NIL, false, false, true, T_FUNC_AND_PROC, false, false, NIL, false);
 
 	if (clist == NULL)
+	{
 		elog(WARNING, "function \"%s()\" does not exist", funcname);
+	}
 	else
 	{
 		/* execute function */
