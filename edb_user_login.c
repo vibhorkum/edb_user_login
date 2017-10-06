@@ -16,10 +16,16 @@
 #include "utils/builtins.h"
 #include "utils/guc.h"
 #include "catalog/pg_proc.h"
+#include "nodes/pg_list.h"
 
 PG_MODULE_MAGIC;
 
+#if PG_VERSION_NUM >= 100000 
+	#include "utils/regproc.h"
+#endif
+
 void		_PG_init(void);
+static void exec_procedure(char *funcname);
 
 char *edb_login_function = NULL;
 bool user_login_enable = true;
@@ -29,8 +35,9 @@ bool user_login_enable = true;
  * can not have any parameters. This module will
  * be used for execution login/logout procedure.
  */
+
 static void
-exec_function(char *funcname)
+exec_procedure(char *funcname)
 {
 	FuncCandidateList clist;
 	List *names;
@@ -77,7 +84,7 @@ _PG_init(void)
 			SetCurrentStatementStartTimestamp();
 			StartTransactionCommand();
 
-			exec_function(edb_login_function);
+			exec_procedure(edb_login_function);
 
 			CommitTransactionCommand();
 		}
